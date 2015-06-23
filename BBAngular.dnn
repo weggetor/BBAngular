@@ -1,0 +1,80 @@
+<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="BBAngular_Package" type="Module" version="01.00.00">
+      <friendlyName>BBAngular Package</friendlyName>
+      <description>An AngularJS sample module</description>
+      <iconFile>DesktopModules\BBAngular\BBAngular.png</iconFile>
+      <owner>
+        <name>Torsten Weggen</name>
+        <organization>bitboxx solutions</organization>
+        <url>http://www.bitboxx.net</url>
+        <email>info@bitboxx.net</email>
+      </owner>
+      <license src="License.txt"></license>
+      <releaseNotes src="Release.01.00.00.txt"></releaseNotes>
+      <azureCompatible>False</azureCompatible>
+      <dependencies>
+        <dependency type="CoreVersion">07.00.00</dependency>
+      </dependencies>
+      <components>
+        <component type="Script">
+          <scripts>
+            <basePath>DesktopModules\BBAngular</basePath>
+            <script type="Install">
+              <path>Installation</path>
+              <name>00.00.01.SqlDataProvider</name>
+              <version>00.00.01</version>
+            </script>
+            <script type="Uninstall">
+              <path>Installation</path>
+              <name>Uninstall.SqlDataProvider</name>
+            </script>
+          </scripts>
+        </component>
+        <component type="Module">
+          <desktopModule>
+            <moduleName>Constants.DESKTOPMODULE_NAME</moduleName>
+            <foldername>BBAngular</foldername>
+            <businessControllerClass />
+            <supportedFeatures />
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>Constants.DESKTOPMODULE_FRIENDLYNAME</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/BBAngular/View.ascx</controlSrc>
+                    <supportsPartialRendering>false</supportsPartialRendering>
+                    <supportsPopUps>false</supportsPopUps>
+                    <controlTitle>BBAngular</controlTitle>
+                    <controlType>View</controlType>
+                    <helpUrl />
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <path>bin</path>
+              <name>Bitboxx.DNNModules.BBAngular.dll</name>
+            </assembly>
+          </assemblies>
+        </component>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules\BBAngular</basePath>
+            <resourceFile>
+              <name>resources.zip</name>
+              <sourceFileName>resources.zip</sourceFileName>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+        <component type="Cleanup" version="01.00.00" fileName="Installation\CleanUp\CleanUp.01.00.00.txt" />
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>
