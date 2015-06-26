@@ -10,6 +10,8 @@
 ' 
 */
 
+using System.Collections;
+using System.Resources;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework.JavaScriptLibraries;
@@ -28,6 +30,7 @@ namespace Bitboxx.DNNModules.BBAngular
     public partial class View : PortalModuleBase
     {
         protected string UserList { get; set; }
+        protected string Resources { get; set; }
         protected bool Editable { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -43,6 +46,7 @@ namespace Bitboxx.DNNModules.BBAngular
                 {
                     //get a list of users to assign the user to the Object
                     populateUserLists();
+                    populateResources();
                 }
                 
             }
@@ -83,8 +87,36 @@ namespace Bitboxx.DNNModules.BBAngular
             }
             UserList = new JavaScriptSerializer().Serialize(userList);
         }
+
+        private void populateResources()
+        {
+            ResXResourceReader rsxr = new ResXResourceReader( MapPath(LocalResourceFile + ".ascx.resx"));
+
+            // Create an IDictionaryEnumerator to iterate through the resources.
+            IDictionaryEnumerator id = rsxr.GetEnumerator();
+
+            var resources = new List<ResourceOption>();
+
+            // Iterate through the resources and display the contents to the console.
+            foreach (DictionaryEntry d in rsxr)
+            {
+                string key = d.Key.ToString();
+                resources.Add(new ResourceOption {key = key,value = LocalizeString(key)});
+            }
+
+            //Close the reader.
+            rsxr.Close();
+
+            Resources = new JavaScriptSerializer().Serialize(resources);
+        }
     }
 
+    public class ResourceOption
+    {
+        public string key { get; set; }
+        public string value { get; set; }
+    }
+    
     public class ListOption
     {
         public int id { get; set; }

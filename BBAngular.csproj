@@ -69,6 +69,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\System.Web.Http.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +95,7 @@
     <Content Include="Installation\ReleaseNotes\Release.01.00.00.txt" />
     <Content Include="js\dnnServiceClient.js" />
     <Content Include="js\itemController.js" />
+    <Content Include="js\itemForm.html" />
     <Content Include="js\ngProgress\ngProgress-directive.js" />
     <Content Include="js\ngProgress\ngProgress.css" />
     <Content Include="js\ngProgress\ngProgress.min.js" />
@@ -117,7 +119,11 @@
   <ItemGroup>
     <Content Include="Installation\Project.targets" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="App_LocalResources\View.ascx.de-DE.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

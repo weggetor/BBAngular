@@ -19,6 +19,7 @@ function ItemController($scope, $window, $log, ngDialog, ngProgress, dnnServiceC
     vm.EditIndex = -1;
     vm.UserList = bitboxx.UserList;
     vm.Item = {};
+    vm.Resources = bitboxx.Resources;
 
     vm.init = init;
     vm.getAll = getAll;
@@ -29,6 +30,7 @@ function ItemController($scope, $window, $log, ngDialog, ngProgress, dnnServiceC
     vm.reset = resetItem;
     vm.initUser = initUser;
     vm.changeUser = changeUser;
+    vm.localize = localize;
 
     resetItem();
 
@@ -105,6 +107,16 @@ function ItemController($scope, $window, $log, ngDialog, ngProgress, dnnServiceC
         }
     };
 
+    //function showAdd() {
+    //    vm.reset();
+    //    vm.AddEditTitle = "Add Item";
+    //    ngDialog.open({
+    //        template: 'desktopmodules/BBAngular/js/itemForm.html',
+    //        className: 'ngdialog-theme-default',
+    //        scope: $scope
+    //    });
+    //};
+    
     function showAdd() {
         vm.reset();
         vm.AddEditTitle = "Add Item";
@@ -144,4 +156,10 @@ function ItemController($scope, $window, $log, ngDialog, ngProgress, dnnServiceC
         vm.Item.AssignedUserId = parseInt(vm.Item.AssignedUserSel.id);
     };
 
+    function localize(key) {
+        var matches = vm.Resources.filter(function(a) {
+            return a.key == key;
+        });
+        return matches[0].value;
+    }
 };
