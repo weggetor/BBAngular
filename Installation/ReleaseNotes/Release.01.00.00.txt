@@ -1,8 +1,8 @@
 ﻿<h3>Angular Module</h3>
 <p class="Contributor">
-	DotNetNuclear.com <br />
-	<a href="mailto:support@dotnetnuclear.com">support@dotnetnuclear.com</a><br />
-	<a href=http://www.dotnetnuclear.com>http://www.dotnetnuclear.com</a><br />
+	bitboxx solutions <br />
+	<a href="mailto:support@bitboxx.net">support@bitboxx.net</a><br />
+	<a href="http://www.bitboxx.net">http://www.bitboxx.net</a><br />
 </p>
 <hr/>
 <div class="License">

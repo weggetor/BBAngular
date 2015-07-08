@@ -132,7 +132,7 @@
   <data name="EditItem.Text" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="EditModule.Text" xml:space="preserve">
+  <data name="AddItem.Text" xml:space="preserve">
     <value>Add Item</value>
   </data>
   <data name="lblAssignedUser.Text" xml:space="preserve">
@@ -158,5 +158,11 @@
   </data>
   <data name="minItemName.Text" xml:space="preserve">
     <value>Minimum Item Name length: 5</value>
+  </data>
+  <data name="CancelEdit.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SaveEdit.Text" xml:space="preserve">
+    <value>Save</value>
   </data>
 </root>

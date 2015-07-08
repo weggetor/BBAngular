@@ -189,7 +189,7 @@
     <MakeDir Directories="$(MSBuildProjectDirectory)\tmpCompressScript" />
     <MakeDir Directories="$(MSBuildProjectDirectory)\tmpCompressCSS" />
     <!--Copy script files to temp location, compress the original scripts and later place the backup of the original back to the original location -->
-    <CreateItem Include="$(MSBuildProjectDirectory)\**\*.js;" Exclude="$(MSBuildProjectDirectory)\**\*.min.js;$(MSBuildProjectDirectory)\tmpCompressScript\**\*.js" >
+    <CreateItem Include="$(MSBuildProjectDirectory)\**\*.js;" Exclude="$(MSBuildProjectDirectory)\tmpCompressScript\**\*.js" >
       <Output TaskParameter="Include" ItemName="ScriptsToCompressFiles"/>
     </CreateItem>
     <Copy ContinueOnError="true" SourceFiles="@(ScriptsToCompressFiles)" DestinationFolder="$(MSBuildProjectDirectory)\tmpCompressScript\%(RecursiveDir)">
@@ -236,7 +236,7 @@
 			IsEvalIgnored: (False/True), default False.
 		-->
     <CompressScriptComponent Files="@(ScriptsToCompressFiles)"
-			EnableCompression="True"
+			EnableCompression="False"
 			IsVerboseLogging="False"
 			IsObfuscateJavascript="True"
 			PreserveAllSemicolons="True"
@@ -257,7 +257,7 @@
 				- StockYuiCompressor
 		-->
     <CompressCssComponent Files="@(StylesheetsToCompressFiles)"
-			EnableCompression="True"
+			EnableCompression="False"
 			LineBreakPosition="218"
 			CompressionType="MichaelAshRegexEnhancements" >
       <Output TaskParameter="ResultString" PropertyName="compressCssComponent" />
@@ -279,8 +279,7 @@
 						$(MSBuildProjectDirectory)\Installation\*.png;
 						$(MSBuildProjectDirectory)\tmpCompressScript\**;
 						$(MSBuildProjectDirectory)\tmpCompressCSS\**;
-						$(MSBuildProjectDirectory)\**\*.min.js;
-						$(MSBuildProjectDirectory)\**\*.min.css;
+            $(MSBuildProjectDirectory)\**\*GhostDoc*.*;
 						@(ProjectsToExclude)"
 			Include="$(MSBuildProjectDirectory)\**\*.ascx;
 						$(MSBuildProjectDirectory)\**\*.aspx;
@@ -297,6 +296,7 @@
 						$(MSBuildProjectDirectory)\**\*.js;
 						$(MSBuildProjectDirectory)\**\*.template;
 						$(MSBuildProjectDirectory)\**\*.htm;
+            $(MSBuildProjectDirectory)\**\*.html;
 						$(MSBuildProjectDirectory)\**\*.htp;">
       <Output TaskParameter="Include" ItemName="resources" />
     </CreateItem>
@@ -378,6 +378,9 @@
   <Target Name="ZipLang" Inputs="@(Languages)" Outputs="%(Identity).Dummy">
     <Message Text="Start create language resource pack for Language: @(Languages)" />
     <!-- Base Path for language pack is "DesktopModules" -->
+    <CreateItem Include="$(MSBuildProjectDirectory)\..\..\">
+      <Output ItemName="MSBuildProjectParentDirectory" TaskParameter="Include"/>
+    </CreateItem>
     <!-- We need the code files for reading package information -->
     <CreateItem Include="$(MSBuildProjectDirectory)\**\*.vb;$(MSBuildProjectDirectory)\**\*.cs">
       <Output TaskParameter="Include" ItemName="CodeFiles" />
@@ -387,13 +390,15 @@
       <Output TaskParameter="Include" ItemName="LanguageFiles" />
     </CreateItem>
     <!--manifest file name-->
-    <CreateItem Include="$(TEMP)\$(ZipFileNamePrefix)_%(Languages.Identity).dnn" >
+    <CreateItem Include="$(MSBuildProjectParentDirectory)\$(ZipFileNamePrefix) %(Languages.Identity).dnn" >
       <Output TaskParameter="Include" ItemName="dnnLangFile" />
     </CreateItem>
     <Message Text="Language resource pack manifest: @(dnnLangFile)" />
+    <Message Text="Language pack files: @(langSources)" />
+    
     <!--Write the dnn file-->
     <CreateDnnLanguageFile Target="@(dnnLangFile)" CodeFiles="@(CodeFiles)" Language="%(Languages.Identity)" LanguageFiles="@(LanguageFiles)" Version="$(FileMajor).$(FileMinor).$(FileBuild)" ModulePath="$(DesktopFolderName)"/>
-    <CreateItem Include="$(MSBuildProjectDirectory)\**\*.ascx.%(Languages.Identity).resx;;$(MSBuildProjectDirectory)\**\*.%(Languages.Identity).htp;$(TEMP)\$(ZipFileNamePrefix)_%(Languages.Identity).dnn" >
+    <CreateItem Include="$(MSBuildProjectDirectory)\**\*.ascx.%(Languages.Identity).resx;;$(MSBuildProjectDirectory)\**\*.%(Languages.Identity).htp;$(ZipFileNamePrefix)_%(Languages.Identity).dnn" >
       <Output TaskParameter="Include" ItemName="langSources" />
     </CreateItem>
     <!-- Zip content -->

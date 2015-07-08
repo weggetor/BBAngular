@@ -118,25 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BasicSettings.Text" xml:space="preserve">
-    <value>Basic Client Centric Settings</value>
+    <value>Einstellungen</value>
   </data>
   <data name="CollapseAll.Text" xml:space="preserve">
-    <value>Collapse All</value>
+    <value>Alle minimieren</value>
   </data>
   <data name="ConfirmDelete.Text" xml:space="preserve">
-    <value>Are you sure you want to delete this Item</value>
+    <value>Sind Sie sicher das Sie dieses Item löschen wollen ?</value>
   </data>
   <data name="DeleteItem.Text" xml:space="preserve">
-    <value>Delete</value>
+    <value>Löschen</value>
   </data>
   <data name="EditItem.Text" xml:space="preserve">
-    <value>Edit</value>
+    <value>Bearbeiten</value>
   </data>
-  <data name="EditModule.Text" xml:space="preserve">
-    <value>Add Item</value>
+  <data name="AddItem.Text" xml:space="preserve">
+    <value>Item hinzufügen</value>
   </data>
   <data name="lblAssignedUser.Text" xml:space="preserve">
-    <value>Assigned User</value>
+    <value>Zugeordneter Benutzer</value>
   </data>
   <data name="lblDescription.Text" xml:space="preserve">
     <value>Beschreibung</value>
@@ -144,19 +144,22 @@
   <data name="lblName.Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="NoRecords.Text" xml:space="preserve">
-    <value>No items exists in the database</value>
-  </data>
   <data name="reqAssignedUser.Text" xml:space="preserve">
-    <value>Assigned User is required</value>
+    <value>Zugeordneter Benutzer ist erforderlich</value>
   </data>
   <data name="reqItemDescription.Text" xml:space="preserve">
-    <value>Item Description is required</value>
+    <value>Item Beschreibung ist erforderlich</value>
   </data>
   <data name="reqItemName.Text" xml:space="preserve">
-    <value>Item Name is required</value>
+    <value>Item Name ist erforderlich</value>
   </data>
   <data name="minItemName.Text" xml:space="preserve">
-    <value>Minimum Item Name length: 5</value>
+    <value>Item Name muss mindestens 5 Zeichen beinhalten</value>
+  </data>
+  <data name="CancelEdit.Text" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="SaveEdit.Text" xml:space="preserve">
+    <value>Speichern</value>
   </data>
 </root>
