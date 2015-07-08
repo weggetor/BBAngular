@@ -1,4 +1,4 @@
-﻿angular.module("bitboxx.ItemApp")
+﻿angular.module("itemApp")
     .factory("dnnServiceClient", ['$http', dnnServiceClient]);
 
 function dnnServiceClient($http) {

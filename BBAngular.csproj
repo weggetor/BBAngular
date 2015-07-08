@@ -101,7 +101,7 @@
     <Content Include="js\ngProgress\ngProgress.css" />
     <Content Include="js\ngProgress\ngProgress.min.js" />
     <Content Include="module.css" />
-    <Content Include="js\item-app.js" />
+    <Content Include="js\app.js" />
     <Content Include="Installation\BBAngular.png" />
     <Content Include="js\ngDialog\ngDialog-theme-default.min.css" />
     <Content Include="js\ngDialog\ngDialog.min.css" />

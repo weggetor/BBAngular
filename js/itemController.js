@@ -1,4 +1,4 @@
-﻿angular.module("bitboxx.ItemApp")
+﻿angular.module("itemApp")
     .controller("ItemController", ItemController);
 
 function ItemController($scope, $window, $log, ngDialog, ngProgress, dnnServiceClient) {
@@ -17,7 +17,8 @@ function ItemController($scope, $window, $log, ngDialog, ngProgress, dnnServiceC
     vm.Items = [];
     vm.AddEditTitle = "";
     vm.EditIndex = -1;
-    vm.UserList = bitboxx.UserList;
+    vm.UserList = app.UserList;
+    vm.localize = app.Resources;
     vm.Item = {};
 
     vm.init = init;
@@ -29,7 +30,6 @@ function ItemController($scope, $window, $log, ngDialog, ngProgress, dnnServiceC
     vm.reset = resetItem;
     vm.initUser = initUser;
     vm.changeUser = changeUser;
-    vm.localize = bitboxx.Resources;
 
     resetItem();
 
@@ -155,10 +155,4 @@ function ItemController($scope, $window, $log, ngDialog, ngProgress, dnnServiceC
         vm.Item.AssignedUserId = parseInt(vm.Item.AssignedUserSel.id);
     };
 
-    //function localize(key) {
-    //    var matches = vm.Resources.filter(function(a) {
-    //        return a.key == key;
-    //    });
-    //    return matches[0].value;
-    //}
 };

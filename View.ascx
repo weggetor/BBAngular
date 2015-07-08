@@ -74,10 +74,11 @@
 
 
 <script type="text/javascript">
-    bitboxx.UserList = <%=Users%>;
-    bitboxx.Resources = <%=Resources%>;
+    var app;
+    app.UserList = <%=Users%>;
+    app.Resources = <%=Resources%>;
     angular.element(document).ready(function () {
         var moduleContainer = document.getElementById('bitboxx-item-<%=this.ModuleId%>');
-        angular.bootstrap(moduleContainer, ["bitboxx.ItemApp"]);
+        angular.bootstrap(moduleContainer, ["itemApp"]);
     });
 </script>
