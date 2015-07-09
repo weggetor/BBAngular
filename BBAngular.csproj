@@ -94,9 +94,9 @@
     <Content Include="Installation\Config\Config.txt" />
     <Content Include="Installation\License.txt" />
     <Content Include="Installation\ReleaseNotes\Release.01.00.00.txt" />
-    <Content Include="js\dnnServiceClient.js" />
+    <Content Include="js\index.html" />
     <Content Include="js\itemController.js" />
-    <Content Include="js\itemForm.html" />
+    <Content Include="js\itemService.js" />
     <Content Include="js\ngProgress\ngProgress-directive.js" />
     <Content Include="js\ngProgress\ngProgress.css" />
     <Content Include="js\ngProgress\ngProgress.min.js" />
