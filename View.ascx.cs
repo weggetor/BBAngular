@@ -17,6 +17,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Services.Exceptions;
+using DotNetNuke.UI.Utilities;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 using System;
 using System.Collections.Generic;
@@ -41,9 +42,10 @@ namespace Bitboxx.DNNModules.BBAngular
                         .ToDictionary(
                             entry => entry.Key.ToString().Replace(".", "_"),
                             entry => LocalizeString(entry.Key.ToString()));
-                    return JsonConvert.SerializeObject(res);
+                    
+                    return ClientAPI.GetSafeJSString(JsonConvert.SerializeObject(res));
                 }
-                ;
+                
             }
         }
 
@@ -53,7 +55,7 @@ namespace Bitboxx.DNNModules.BBAngular
             {
                 var users = UserController.GetUsers(PortalId).Cast<UserInfo>()
                     .Select(u => new {text = u.Username, id = u.UserID});
-                return JsonConvert.SerializeObject(users);
+                return  ClientAPI.GetSafeJSString(JsonConvert.SerializeObject(users));
             }
         }
 
@@ -69,10 +71,11 @@ namespace Bitboxx.DNNModules.BBAngular
                 // Register angular library
                 JavaScript.RequestRegistration("AngularJS");
                 JavaScript.Register(this.Page);
+                ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/angular-route.min.js", DotNetNuke.Web.Client.FileOrder.Js.DnnControls);
 
                 // Register module resources
                 ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/app.js", DotNetNuke.Web.Client.FileOrder.Js.DnnControls);
-                ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/dnnServiceClient.js", DotNetNuke.Web.Client.FileOrder.Js.DefaultPriority);
+                ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/itemService.js", DotNetNuke.Web.Client.FileOrder.Js.DefaultPriority);
                 ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/itemController.js", DotNetNuke.Web.Client.FileOrder.Js.DefaultPriority);
 
                 // Register ngProgress

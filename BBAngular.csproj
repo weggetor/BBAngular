@@ -54,6 +54,10 @@
       <HintPath>..\..\bin\DotNetNuke.Web.Client.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DotNetNuke.WebUtility">
+      <HintPath>..\..\bin\DotNetNuke.WebUtility.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -94,9 +98,9 @@
     <Content Include="Installation\Config\Config.txt" />
     <Content Include="Installation\License.txt" />
     <Content Include="Installation\ReleaseNotes\Release.01.00.00.txt" />
-    <Content Include="js\dnnServiceClient.js" />
+    <Content Include="js\index.html" />
     <Content Include="js\itemController.js" />
-    <Content Include="js\itemForm.html" />
+    <Content Include="js\itemService.js" />
     <Content Include="js\ngProgress\ngProgress-directive.js" />
     <Content Include="js\ngProgress\ngProgress.css" />
     <Content Include="js\ngProgress\ngProgress.min.js" />
@@ -141,7 +145,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50016/</IISUrl>
+          <IISUrl>http://localhost:50805/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
