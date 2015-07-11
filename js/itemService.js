@@ -9,7 +9,7 @@
 
         var urlBase = serviceRoot + "item/";
         var service = {};
-        service.GetAll = GetAllItems;
+        service.GetAllItems = GetAllItems;
         service.UpdateItem = UpdateItem;
         service.NewItem = NewItem;
         service.DeleteItem = DeleteItem;

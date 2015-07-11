@@ -18,8 +18,8 @@
         };
 
         var app = init("itemApp", <%=ModuleId%>, "BBAngular");
-        app.constant("Userlist", '<%=Users%>');
-        app.constant("Resources", '<%=Resources%>');
+        app.constant("userlist", '<%=Users%>');
+        app.constant("resources", '<%=Resources%>');
         var moduleContainer = document.getElementById("itemApp");
         angular.bootstrap(moduleContainer, [app.name]);
     });

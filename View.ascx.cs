@@ -73,7 +73,7 @@ namespace Bitboxx.DNNModules.BBAngular
 
                 // Register module resources
                 ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/app.js", DotNetNuke.Web.Client.FileOrder.Js.DnnControls);
-                ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/dnnServiceClient.js", DotNetNuke.Web.Client.FileOrder.Js.DefaultPriority);
+                ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/itemService.js", DotNetNuke.Web.Client.FileOrder.Js.DefaultPriority);
                 ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/itemController.js", DotNetNuke.Web.Client.FileOrder.Js.DefaultPriority);
 
                 // Register ngProgress
