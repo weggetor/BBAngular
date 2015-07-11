@@ -74,7 +74,7 @@
 
 
 <script type="text/javascript">
-    var app;
+    var app = {};
     app.UserList = <%=Users%>;
     app.Resources = <%=Resources%>;
     angular.element(document).ready(function () {
