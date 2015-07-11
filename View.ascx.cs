@@ -17,6 +17,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Services.Exceptions;
+using DotNetNuke.UI.Utilities;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 using System;
 using System.Collections.Generic;
@@ -41,9 +42,10 @@ namespace Bitboxx.DNNModules.BBAngular
                         .ToDictionary(
                             entry => entry.Key.ToString().Replace(".", "_"),
                             entry => LocalizeString(entry.Key.ToString()));
-                    return JsonConvert.SerializeObject(res);
+                    
+                    return ClientAPI.GetSafeJSString(JsonConvert.SerializeObject(res));
                 }
-                ;
+                
             }
         }
 
@@ -53,7 +55,7 @@ namespace Bitboxx.DNNModules.BBAngular
             {
                 var users = UserController.GetUsers(PortalId).Cast<UserInfo>()
                     .Select(u => new {text = u.Username, id = u.UserID});
-                return JsonConvert.SerializeObject(users);
+                return  ClientAPI.GetSafeJSString(JsonConvert.SerializeObject(users));
             }
         }
 

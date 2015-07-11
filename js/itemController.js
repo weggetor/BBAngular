@@ -3,16 +3,17 @@
         .module("itemApp")
         .controller("itemController", itemController);
 
-    itemController.$inject = ["$scope", "$window", "$log", "ngDialog", "ngProgress", "itemService","userlist","resources"];
+    itemController.$inject = ["$scope", "$window", "$log", "ngDialog", "ngProgress", "itemService","userlist","resources","editable"];
     
-    function itemController($scope, $window, $log, ngDialog, ngProgress, itemService, userlist, resources) {
+    function itemController($scope, $window, $log, ngDialog, ngProgress, itemService, userlist, resources, editable) {
 
         var vm = this;
         vm.Items = [];
         vm.AddEditTitle = "";
         vm.EditIndex = -1;
-        vm.UserList = userlist;
-        vm.localize = resources;
+        vm.UserList = JSON.parse(userlist);
+        vm.localize = JSON.parse(resources);
+        vm.EditMode = editable;
         vm.Item = {};
 
         vm.getAll = getAll;
