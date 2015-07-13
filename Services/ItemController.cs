@@ -10,6 +10,7 @@
 ' 
 */
 
+using System.Collections.Generic;
 using System.Threading;
 using Bitboxx.DNNModules.BBAngular.Components;
 using Bitboxx.DNNModules.BBAngular.Models;
@@ -60,7 +61,7 @@ namespace Bitboxx.DNNModules.BBAngular.Services
                 newItem.AssignedUserId = item.AssignedUserId;
                 newItem.ItemName = item.ItemName;
                 newItem.ItemDescription = item.ItemDescription;
-                int itemId = BBAngularController.Instance.CreateItem(newItem);
+                int itemId = BBAngularController.Instance.NewItem(newItem);
                 return Request.CreateResponse(HttpStatusCode.OK, newItem);
             }
             catch (Exception ex)
@@ -154,6 +155,31 @@ namespace Bitboxx.DNNModules.BBAngular.Services
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
+
+        /// <summary>
+        /// API that reorders an item list
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost, HttpGet]  //[baseURL]/item/list
+        [ValidateAntiForgeryToken]
+        [ActionName("reorder")]
+        [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Edit)]
+        public HttpResponseMessage ReorderItems(List<RequestItemOrder> sortItems)
+        {
+            try
+            {
+                foreach (var itemorder in sortItems)
+                {
+                    BBAngularController.Instance.SetItemOrder(itemorder.ItemId, Convert.ToInt16(itemorder.Sort));
+                }
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
     }
 
     public class RequestItem
@@ -172,12 +198,11 @@ namespace Bitboxx.DNNModules.BBAngular.Services
         public int ItemId { get; set; }
     }
 
-    public class SearchRequest
+
+    public class RequestItemOrder
     {
-        public string Term { get; set; }
-        public int PageSize { get; set; }
-        public int PageNum { get; set; }
-        public int ModuleId { get; set; }
+        public int ItemId { get; set; }
+        public string Sort { get; set; }
     }
 
 }

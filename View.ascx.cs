@@ -49,6 +49,15 @@ namespace Bitboxx.DNNModules.BBAngular
             }
         }
 
+        protected string ModuleSettings
+        {
+            get
+            {
+                return ClientAPI.GetSafeJSString(JsonConvert.SerializeObject(Settings));
+            }
+        }
+
+
         protected string Users
         {
             get
@@ -72,6 +81,7 @@ namespace Bitboxx.DNNModules.BBAngular
                 JavaScript.RequestRegistration("AngularJS");
                 JavaScript.Register(this.Page);
                 ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/angular-route.min.js", DotNetNuke.Web.Client.FileOrder.Js.DnnControls);
+                ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/sortable.min.js", DotNetNuke.Web.Client.FileOrder.Js.DnnControls);
 
                 // Register module resources
                 ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/app.js", DotNetNuke.Web.Client.FileOrder.Js.DnnControls);

@@ -18,11 +18,12 @@
             return application;
         };
 
-        
         var app = init("itemApp", <%=ModuleId%>, "BBAngular_Module");
         app.constant("userlist", '<%=Users%>');
         app.constant("resources", '<%=Resources%>');
         app.constant("editable", '<%=Editable%>');
+        app.constant("moduleId", '<%=ModuleId%>');
+        app.constant("settings", '<%=ModuleSettings%>');
         var moduleContainer = document.getElementById("itemApp<%=ModuleId%>");
         angular.bootstrap(moduleContainer, [app.name]);
     });

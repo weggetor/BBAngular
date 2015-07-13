@@ -19,7 +19,8 @@ CREATE TABLE {databaseOwner}{objectQualifier}BBAngular_Items
     ItemDescription nvarchar(MAX) NOT NULL,
     AssignedUserId int NULL,
     ModuleId int NOT NULL,
-    CreatedOnDate datetime NOT NULL,
+    Sort int NOT NULL DEFAULT (0),
+	CreatedOnDate datetime NOT NULL,
     CreatedByUserId int NOT NULL,
     LastModifiedOnDate datetime NOT NULL,
     LastModifiedByUserId int NOT NULL

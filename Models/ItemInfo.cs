@@ -51,6 +51,11 @@ namespace Bitboxx.DNNModules.BBAngular.Models
         public int ModuleId { get; set; }
 
         ///<summary>
+        /// The Sort field defines the display order
+        ///</summary>
+        public int Sort { get; set; }
+
+        ///<summary>
         /// An integer for the user id of the user who created the object
         ///</summary>
         public int CreatedByUserId { get; set; }

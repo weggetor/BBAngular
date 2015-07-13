@@ -10,6 +10,8 @@
 ' 
 */
 
+using System.Data;
+using System.Linq;
 using Bitboxx.DNNModules.BBAngular.Models;
 using DotNetNuke.Data;
 using System;
@@ -49,7 +51,7 @@ namespace Bitboxx.DNNModules.BBAngular.Components
         /// Clears the cache.
         /// </summary>
         /// <param name="moduleid">The moduleid.</param>
-        public void ClearCache(int moduleid)
+        public void ClearCache(int moduleId)
         {
             using (IDataContext ctx = DataContext.Instance())
             {
@@ -57,49 +59,9 @@ namespace Bitboxx.DNNModules.BBAngular.Components
                 try
                 {
                     // Setup fictitious item to delete (just to clear the scope cache)
-                    var item = new ItemInfo { ItemId = -1, ModuleId = moduleid };
-                    DeleteItem(item);
+                    DeleteItem(-1,moduleId);
                 }
                 catch { } // ignore
-            }
-        }
-
-        /// <summary>
-        /// Creates the item.
-        /// </summary>
-        /// <param name="item">The item.</param>
-        /// <returns>System.Int32.</returns>
-        public int CreateItem(ItemInfo item)
-        {
-            using (IDataContext ctx = DataContext.Instance())
-            {
-                var rep = ctx.GetRepository<ItemInfo>();
-                rep.Insert((ItemInfo)item);
-                return item.ItemId;
-            }
-        }
-
-        /// <summary>
-        /// Deletes the item.
-        /// </summary>
-        /// <param name="itemId">The item identifier.</param>
-        /// <param name="moduleId">The module identifier.</param>
-        public void DeleteItem(int itemId, int moduleId)
-        {
-            var item = GetItem(itemId, moduleId);
-            DeleteItem(item);
-        }
-
-        /// <summary>
-        /// Deletes the item.
-        /// </summary>
-        /// <param name="item">The item.</param>
-        public void DeleteItem(ItemInfo item)
-        {
-            using (IDataContext ctx = DataContext.Instance())
-            {
-                var rep = ctx.GetRepository<ItemInfo>();
-                rep.Delete((ItemInfo)item);
             }
         }
 
@@ -110,13 +72,12 @@ namespace Bitboxx.DNNModules.BBAngular.Components
         /// <returns>IEnumerable&lt;ItemInfo&gt;.</returns>
         public IEnumerable<ItemInfo> GetItems(int moduleId)
         {
-            IEnumerable<ItemInfo> item;
+            IEnumerable<ItemInfo> items;
             using (IDataContext ctx = DataContext.Instance())
             {
-                var rep = ctx.GetRepository<ItemInfo>();
-                item = rep.Get(moduleId);
+                string sql = "SELECT * FROM {databaseOwner}[{objectQualifier}BBAngular_Items] WHERE ModuleId = @0 ORDER BY Sort";
+                return ctx.ExecuteQuery<ItemInfo>(CommandType.Text,sql,moduleId);
             }
-            return item;
         }
 
         /// <summary>
@@ -137,54 +98,18 @@ namespace Bitboxx.DNNModules.BBAngular.Components
         }
 
         /// <summary>
-        /// Gets the item by identifier list.
+        /// Creates a new item.
         /// </summary>
-        /// <param name="idlist">The idlist.</param>
-        /// <param name="moduleId">The module identifier.</param>
-        /// <returns>IEnumerable&lt;ItemInfo&gt;.</returns>
-        public IEnumerable<ItemInfo> GetItemByIdList(int[] idlist, int moduleId)
+        /// <param name="item">The item.</param>
+        /// <returns>System.Int32.</returns>
+        public int NewItem(ItemInfo item)
         {
-            IEnumerable<ItemInfo> item;
             using (IDataContext ctx = DataContext.Instance())
             {
                 var rep = ctx.GetRepository<ItemInfo>();
-                item = rep.Find(String.Format("WHERE ModuleId = @0 AND ItemId IN ( {0} )", String.Join(",", idlist)), moduleId);
+                rep.Insert((ItemInfo)item);
+                return item.ItemId;
             }
-            return item;
-        }
-
-        /// <summary>
-        /// Gets the name of the item by.
-        /// </summary>
-        /// <param name="moduleId">The module identifier.</param>
-        /// <param name="itemname">The itemname.</param>
-        /// <returns>IEnumerable&lt;ItemInfo&gt;.</returns>
-        public IEnumerable<ItemInfo> GetItemByName(int moduleId, string itemname)
-        {
-            IEnumerable<ItemInfo> item;
-            using (IDataContext ctx = DataContext.Instance())
-            {
-                var rep = ctx.GetRepository<ItemInfo>();
-                item = rep.Find("WHERE ModuleId = @0 AND ItemName LIKE @1", moduleId, itemname);
-            }
-            return item;
-        }
-
-        /// <summary>
-        /// Gets all items by date.
-        /// </summary>
-        /// <param name="moduleId">The module identifier.</param>
-        /// <param name="beginDate">The begin date.</param>
-        /// <returns>IEnumerable&lt;ItemInfo&gt;.</returns>
-        public IEnumerable<ItemInfo> GetAllItemsByDate(int moduleId, DateTime beginDate)
-        {
-            IEnumerable<ItemInfo> item;
-            using (IDataContext ctx = DataContext.Instance())
-            {
-                var rep = ctx.GetRepository<ItemInfo>();
-                item = rep.Find("WHERE ModuleId=@0 AND LastModifiedOnDate >= @1", moduleId, beginDate);
-            }
-            return item;
         }
 
         /// <summary>
@@ -197,6 +122,29 @@ namespace Bitboxx.DNNModules.BBAngular.Components
             {
                 var rep = ctx.GetRepository<ItemInfo>();
                 rep.Update((ItemInfo)item);
+            }
+        }
+
+        /// <summary>
+        /// Deletes the item.
+        /// </summary>
+        /// <param name="itemId">The item identifier.</param>
+        /// <param name="moduleId">The module identifier.</param>
+        public void DeleteItem(int itemId, int moduleId)
+        {
+            using (IDataContext ctx = DataContext.Instance())
+            {
+                string sql = "DELETE FROM {databaseOwner}[{objectQualifier}BBAngular_Items] WHERE ModuleId = @0 AND ItemId = @1";
+                ctx.Execute(CommandType.Text, sql, moduleId, itemId);
+            }
+        }
+
+        public void SetItemOrder(int itemId, int sort)
+        {
+            using (IDataContext ctx = DataContext.Instance())
+            {
+                string sql = "UPDATE {databaseOwner}[{objectQualifier}BBAngular_Items] SET Sort = @1 WHERE ItemId = @0";
+                ctx.Execute(CommandType.Text, sql, itemId,sort);
             }
         }
     }

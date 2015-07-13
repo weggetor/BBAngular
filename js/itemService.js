@@ -13,21 +13,25 @@
         service.UpdateItem = UpdateItem;
         service.NewItem = NewItem;
         service.DeleteItem = DeleteItem;
+        service.Reorder = Reorder;
 
         function GetAllItems() {
             return $http.get(urlBase + "list");
         };
         
         function UpdateItem(item) {
-            return $http.post(urlBase + "edit", { params: { item: item } });
+            return $http.post(urlBase + "edit",item);
         }
 
         function NewItem(item) {
-            return $http.post(urlBase + "new", { params: { item: item } });
+            return $http.post(urlBase + "new", item );
         }
         
         function DeleteItem(item) {
-            return $http.post(urlBase + "delete", { params: { item: item } });
+            return $http.post(urlBase + "delete", item );
+        }
+        function Reorder(sortItems) {
+            return $http.post(urlBase + "reorder", sortItems );
         }
 
         return service;
