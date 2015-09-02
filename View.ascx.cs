@@ -76,29 +76,30 @@ namespace Bitboxx.DNNModules.BBAngular
             {
                 DotNetNuke.Framework.ServicesFramework.Instance.RequestAjaxScriptSupport();
                 DotNetNuke.Framework.ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
-                
+
                 // Register angular library
                 JavaScript.RequestRegistration("AngularJS");
-                JavaScript.Register(this.Page);
-                ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/angular-route.min.js", DotNetNuke.Web.Client.FileOrder.Js.DnnControls);
-                ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/sortable.min.js", DotNetNuke.Web.Client.FileOrder.Js.DnnControls);
+                JavaScript.RequestRegistration("angular-route", new Version("01.02.28"));
+
+                // Register ngProgress
+                JavaScript.RequestRegistration("angular-ng-progress", new Version("01.00.07"));
+                ClientResourceManager.RegisterStyleSheet(this.Page, "~/Resources/libraries/angular-ng-progress/01_00_07/ngProgress.min.css", DotNetNuke.Web.Client.FileOrder.Css.DefaultPriority);
+
+                // Register ngDialog
+                JavaScript.RequestRegistration("angular-ng-dialog", new Version("00.05.01"));
+                ClientResourceManager.RegisterStyleSheet(this.Page, "~/Resources/libraries/angular-ng-dialog/00_05_01/ngDialog.min.css", DotNetNuke.Web.Client.FileOrder.Css.DefaultPriority);
+                ClientResourceManager.RegisterStyleSheet(this.Page, "~/Resources/libraries/angular-ng-dialog/00_05_01/ngDialog-theme-default.min.css", DotNetNuke.Web.Client.FileOrder.Css.DefaultPriority);
+
+                // Register jqueryUI sortable angular directives
+                JavaScript.RequestRegistration("angular-ui-sortable", new Version("00.13.04"));
 
                 // Register module resources
                 ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/app.js", DotNetNuke.Web.Client.FileOrder.Js.DnnControls);
                 ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/itemService.js", DotNetNuke.Web.Client.FileOrder.Js.DefaultPriority);
                 ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/itemController.js", DotNetNuke.Web.Client.FileOrder.Js.DefaultPriority);
 
-                // Register ngProgress
-                ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/ngProgress/ngProgress.min.js", DotNetNuke.Web.Client.FileOrder.Js.DnnControls);
-                ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/ngProgress/ngProgress-directive.js", DotNetNuke.Web.Client.FileOrder.Js.DefaultPriority);
-                ClientResourceManager.RegisterStyleSheet(this.Page, ControlPath + "js/ngProgress/ngProgress.css", DotNetNuke.Web.Client.FileOrder.Css.DefaultPriority);
-
-                // Register ngDialog
-                ClientResourceManager.RegisterScript(this.Page, ControlPath + "js/ngDialog/ngDialog.min.js", DotNetNuke.Web.Client.FileOrder.Js.DnnControls);
-                ClientResourceManager.RegisterStyleSheet(this.Page, ControlPath + "js/ngDialog/ngDialog.min.css", DotNetNuke.Web.Client.FileOrder.Css.DefaultPriority);
-                ClientResourceManager.RegisterStyleSheet(this.Page, ControlPath + "js/ngDialog/ngDialog-theme-default.min.css", DotNetNuke.Web.Client.FileOrder.Css.DefaultPriority);
-
-                Editable = (IsEditable || UserId > 0);
+                
+                Editable = (IsEditable && UserId > 0);
             }
             catch (Exception exc) //Module failed to load
             {

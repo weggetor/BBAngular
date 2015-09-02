@@ -14,6 +14,7 @@
         service.NewItem = NewItem;
         service.DeleteItem = DeleteItem;
         service.Reorder = Reorder;
+        service.GetCategories = GetCategories;
 
         function GetAllItems() {
             return $http.get(urlBase + "list");
@@ -32,6 +33,19 @@
         }
         function Reorder(sortItems) {
             return $http.post(urlBase + "reorder", sortItems );
+        }
+        function GetCategories() {
+            var req = {
+                method: 'GET',
+                url: "http://dnnfaq.local/Desktopmodules/faqs/API/service/GetCategories",
+                headers: {
+                    'TabId': undefined,
+                    'ModuleId': undefined,
+                    'RequestVerificationToken': undefined
+                },
+                params: { moduleId: 412, onlyUsedCategories: false }
+            };
+            return $http(req);
         }
 
         return service;

@@ -11,7 +11,6 @@
 */
 
 using System.Collections.Generic;
-using System.Threading;
 using Bitboxx.DNNModules.BBAngular.Components;
 using Bitboxx.DNNModules.BBAngular.Models;
 using DotNetNuke.Security;
