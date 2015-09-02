@@ -32,6 +32,12 @@ TestResult.xml
 [Rr]eleasePS/
 dlldata.c
 
+# DNN stuff
+[Ii]nstallation/BBAngular.dnn
+[Ii]nstallation/*.bak
+[Ii]nstallation/*.zip
+*GhostDoc*
+
 *_i.c
 *_p.c
 *_i.h
